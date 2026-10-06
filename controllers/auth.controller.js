@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../database.js';
 
 // Clave secreta para firmar el JWT (En producción debería ir en un archivo .env)
-const JWT_SECRET = 'ayto_deportes_super_secreto';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const login = (req, res) => {
    try {

@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
 // El mismo secreto que usamos en auth.controller.js
-const JWT_SECRET = 'ayto_deportes_super_secreto';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // ==========================================
 // MIDDLEWARE 1: EL común para todos
@@ -34,7 +35,7 @@ export const verificarToken = (req, res, next) => {
 };
 
 // ==========================================
-// MIDDLEWARE 2: El que solo accede el director
+// MIDDLEWARE 2: El que solo accede el administrador
 // ==========================================
 export const esAdmin = (req, res, next) => {
    // Confiamos en que verificarToken ya se ejecutó y llenó req.usuario
