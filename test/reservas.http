@@ -1,4 +1,21 @@
 @baseUrl = http://localhost:3000/api/reservas
+@authUrl = http://localhost:3000/api/auth
+
+### ==========================================
+### PASO 0: LOGIN (Necesitamos el token)
+### ==========================================
+### El usuario de la reserva YA NO se manda en el body:
+### el backend lo saca del token JWT (req.usuario.id).
+### Haz login y copia el token donde dice PEGA_AQUI_EL_TOKEN
+# @name loginCiudadano
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+ "email": "ana@email.com",
+ "password": "1234"
+}
+
 
 ### ==========================================
 ### CASOS DE ÉXITO (Happy Path)
@@ -10,12 +27,13 @@ GET {{baseUrl}}
 ### 2. Obtener una reserva existente por ID (Esperado: 200 OK)
 GET {{baseUrl}}/1
 
-### 3. Crear una reserva válida (Usuario 1 reserva Espacio 2 - Pádel)
+### 3. Crear una reserva válida (Esperado: 201 Created)
+# El usuario se toma del token (Ana, usuario 1)
 POST {{baseUrl}}
+Authorization: Bearer PEGA_AQUI_EL_TOKEN
 Content-Type: application/json
 
 {
- "usuario_id": 2,
  "espacio_id": 2,
  "fecha": "2026-10-05",
  "hora_inicio": "17:00",
@@ -24,6 +42,7 @@ Content-Type: application/json
 
 ### 4. Cancelar una reserva existente (Esperado: 200 OK)
 PUT {{baseUrl}}/1
+Authorization: Bearer PEGA_AQUI_EL_TOKEN
 Content-Type: application/json
 
 {
@@ -32,18 +51,20 @@ Content-Type: application/json
 
 ### 5. Borrar una reserva (Esperado: 204 No Content)
 DELETE {{baseUrl}}/2
+Authorization: Bearer PEGA_AQUI_EL_TOKEN
 
 
 ### ==========================================
 ### CASOS DE ERROR Y LÓGICA DE NEGOCIO
 ### ==========================================
 
-### 6. Crear reserva con usuario que NO existe (Esperado: 404 Not Found)
+### 6. Crear una reserva SIN token (Esperado: 401 Unauthorized)
+# Nota: el usuario ya no se envía en el body, así que este caso
+# ahora se prueba desde el lado de la autenticación
 POST {{baseUrl}}
 Content-Type: application/json
 
 {
- "usuario_id": 999,
  "espacio_id": 1,
  "fecha": "2024-11-20",
  "hora_inicio": "10:00",
@@ -52,10 +73,10 @@ Content-Type: application/json
 
 ### 7. Crear reserva en espacio CERRADO (ID 3 - Gimnasio) (Esperado: 400 Bad Request)
 POST {{baseUrl}}
+Authorization: Bearer PEGA_AQUI_EL_TOKEN
 Content-Type: application/json
 
 {
- "usuario_id": 1,
  "espacio_id": 3,
  "fecha": "2024-11-20",
  "hora_inicio": "10:00",
@@ -65,13 +86,12 @@ Content-Type: application/json
 ### 8. DOBLE RESERVA: Mismo espacio, fecha y hora (Esperado: 409 Conflict)
 # En database.js insertamos una reserva para la Piscina (ID 1) el 2024-10-15 a las 10:00
 POST {{baseUrl}}
+Authorization: Bearer PEGA_AQUI_EL_TOKEN
 Content-Type: application/json
 
 {
- "usuario_id": 2,
  "espacio_id": 1,
  "fecha": "2024-10-15",
  "hora_inicio": "10:00",
  "hora_fin": "11:00"
 }
-

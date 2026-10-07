@@ -40,7 +40,8 @@ export const getReservaById = (req, res) => {
 // CREAR UNA RESERVA (POST)
 export const createReserva = (req, res) => {
     try {
-        const { usuario_id, espacio_id, fecha, hora_inicio, hora_fin } = req.body;
+        const { espacio_id, fecha, hora_inicio, hora_fin } = req.body;
+        const usuario_id = req.usuario.id;   // viene del JWT (ya decodificado por verificarToken)
         
         // 1. Validación básica
         if (!usuario_id || !espacio_id || !fecha || !hora_inicio || !hora_fin) {
