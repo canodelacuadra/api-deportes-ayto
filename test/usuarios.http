@@ -15,9 +15,9 @@ POST {{baseUrl}}
 Content-Type: application/json
 
 {
- "nombre": "Laura Martínez",
- "email": "laura@email.com",
- "password": "secreto123"
+ "nombre": "Isabel Acero",
+ "email": "isabel@email.com",
+ "password": "1234"
 }
 
 ### 4. Crear un usuario administrador (Esperado: 201 Created)
