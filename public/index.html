@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Deportes Ayto</title>
+    <meta
+      name="description"
+      content="Página de inicio de la API REST del Ayuntamiento para gestión de espacios deportivos, reservas, usuarios y autenticación."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav container">
+        <div class="brand">API Deportes Ayto</div>
+        <div class="nav-links">
+          <a href="#features">Funciones</a>
+          <a href="#endpoints">Endpoints</a>
+          <a href="/api-docs">Documentación</a>
+        </div>
+      </nav>
+
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="eyebrow">REST API</span>
+          <h1>Gestiona espacios deportivos y reservas del Ayuntamiento</h1>
+          <p>
+            API segura y rápida para gestionar usuarios, instalaciones, reservas y
+            flujos de autenticación con una documentación interactiva accesible
+            desde Swagger.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="/api-docs">Ver documentación</a>
+            <a class="button secondary" href="#endpoints">Explorar endpoints</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>4</strong> módulos principales</li>
+            <li><strong>JWT</strong> autenticación</li>
+            <li><strong>REST</strong> moderna</li>
+          </ul>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+
+          <pre class="code-block"><code>GET /api/espacios
+GET /api/reservas
+POST /api/auth/login
+GET /api/usuarios
+</code></pre>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="features" class="features container">
+        <div class="section-heading">
+          <span class="eyebrow">Características</span>
+          <h2>Todo lo que necesitas para la gestión deportiva</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Espacios</h3>
+            <p>Consulta y administra instalaciones deportivas disponibles en el sistema.</p>
+          </article>
+          <article class="card">
+            <h3>Reservas</h3>
+            <p>Gestiona solicitudes, disponibilidad y confirmaciones de cada reserva.</p>
+          </article>
+          <article class="card">
+            <h3>Usuarios</h3>
+            <p>Controla perfiles, permisos y datos asociados a cada usuario del app.</p>
+          </article>
+          <article class="card">
+            <h3>Autenticación</h3>
+            <p>Acceso seguro mediante JWT para proteger rutas y operaciones sensibles.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="endpoints" class="endpoints container">
+        <div class="section-heading">
+          <span class="eyebrow">Endpoints</span>
+          <h2>Principales rutas de la API</h2>
+        </div>
+
+        <div class="endpoint-list">
+          <div class="endpoint-item">
+            <span class="method get">GET</span>
+            <code>/api/espacios</code>
+            <p>Obtiene la lista de espacios deportivos.</p>
+          </div>
+          <div class="endpoint-item">
+            <span class="method post">POST</span>
+            <code>/api/auth/login</code>
+            <p>Inicio de sesión con credenciales del usuario.</p>
+          </div>
+          <div class="endpoint-item">
+            <span class="method get">GET</span>
+            <code>/api/reservas</code>
+            <p>Consulta las reservas registradas o por usuario.</p>
+          </div>
+          <div class="endpoint-item">
+            <span class="method get">GET</span>
+            <code>/api/usuarios</code>
+            <p>Lista los usuarios activos del sistema.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
