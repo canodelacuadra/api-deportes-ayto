@@ -1,0 +1,17 @@
+
+@baseUrl = http://localhost:3000/api
+@authUrl = {{baseUrl}}/auth
+
+
+
+###
+POST {{authUrl}}/login
+Content-Type: application/json
+
+{
+ "email": "admin@ayto.com",
+ "password": "admin123"
+}
+###
+GET {{baseUrl}}/reservas/verificar/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sIjoiYWRtaW4iLCJpYXQiOjE3OTE1NjYyOTYsImV4cCI6MTc5MTU3MzQ5Nn0.WJZWUb3bxg6OWeVdZw6SuAvG07SO-7n0OmsBXbiCcPc

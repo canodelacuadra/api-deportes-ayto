@@ -109,3 +109,34 @@ export const deleteReserva = (req, res) => {
     }
 };
 
+// VERIFICAR UNA RESERVA (Para el conserje con el QR)
+export const verificarReserva = (req, res) => {
+   try {
+       const { id } = req.params;
+      
+       const reserva = db.prepare(`
+           SELECT r.id, u.nombre as usuario_nombre, e.nombre as espacio_nombre,
+                  r.fecha, r.hora_inicio, r.hora_fin, r.estado
+           FROM reservas r
+           JOIN usuarios u ON r.usuario_id = u.id
+           JOIN espacios e ON r.espacio_id = e.id
+           WHERE r.id = ?
+       `).get(id);
+
+       if (!reserva) {
+           return res.status(404).json({ valid: false, error: 'Reserva no encontrada (QR inválido)' });
+       }
+
+       if (reserva.estado === 'cancelada') {
+           return res.json({ valid: false, mensaje: 'Esta reserva ha sido CANCELADA', reserva });
+       }
+
+       // Si todo va bien
+       res.json({ valid: true, mensaje: '✅ Reserva VÁLIDA', reserva });
+
+   } catch (error) {
+       res.status(500).json({ error: 'Error al verificar la reserva' });
+   }
+};
+
+
